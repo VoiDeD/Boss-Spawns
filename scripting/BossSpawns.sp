@@ -2319,7 +2319,7 @@ stock PrecacheSounds(const String:strSounds[][], iArraySize)
 	{
 		if (!PrecacheSound(strSounds[i]))
 		{
-			PrintToChatAll("Faild to precache sound: %s", strSounds[i]);
+			LogError("Failed to precache sound: %s", strSounds[i]);
 		}
 	}
 }
