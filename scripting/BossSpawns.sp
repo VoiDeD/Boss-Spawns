@@ -12,6 +12,15 @@
 #define PLUGIN_VERSION "1.0.8"
 #define PLUGIN_TAG "[BossSpawns]"
 
+// god have mercy on me for attempting to improve my life
+#define sm_bossspawns_version		(ConVars[0])
+#define sm_bossspawns_status		(ConVars[1])
+#define sm_bossspawns_hitboxes		(ConVars[2])
+#define sm_bossspawns_bounds		(ConVars[3])
+#define sm_bossspawns_spawnsounds	(ConVars[4])
+#define sm_bossspawns_chattag		(ConVars[5])
+#define sm_bossspawns_verbose		(ConVars[6])
+
 new Handle:ConVars[7] = {INVALID_HANDLE, ...};
 new bool:cv_Enabled, cv_HitboxScale, cv_SpawnSounds, String:sPluginTag[64], bool:cv_Verbose;
 
@@ -177,13 +186,13 @@ public OnPluginStart()
 	
 	AutoExecConfig_SetFile("BossSpawns");
 		
-	ConVars[0] = AutoExecConfig_CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_DONTRECORD);
-	ConVars[1] = AutoExecConfig_CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	ConVars[2] = AutoExecConfig_CreateConVar("sm_bossspawns_hitboxes", "1", "Enable hitbox scaling on spawned bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	ConVars[3] = AutoExecConfig_CreateConVar("sm_bossspawns_bounds", "0.1, 5.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", FCVAR_PLUGIN);
-	ConVars[4] = AutoExecConfig_CreateConVar("sm_bossspawns_spawnsounds", "1", "Enable spawn sounds for bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	ConVars[5] = AutoExecConfig_CreateConVar("sm_bossspawns_chattag", "{gold}[BossSpawns]", "Tag for plugin to use: (Uses color tags, max 64 characters)");
-	ConVars[6] = AutoExecConfig_CreateConVar("sm_bossspawns_verbose", "1", "Enable spawn verbose messages: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_version = AutoExecConfig_CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_DONTRECORD);
+	sm_bossspawns_status = AutoExecConfig_CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_hitboxes = AutoExecConfig_CreateConVar("sm_bossspawns_hitboxes", "1", "Enable hitbox scaling on spawned bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_bounds = AutoExecConfig_CreateConVar("sm_bossspawns_bounds", "0.1, 5.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", FCVAR_PLUGIN);
+	sm_bossspawns_spawnsounds = AutoExecConfig_CreateConVar("sm_bossspawns_spawnsounds", "1", "Enable spawn sounds for bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_chattag = AutoExecConfig_CreateConVar("sm_bossspawns_chattag", "{gold}[BossSpawns]", "Tag for plugin to use: (Uses color tags, max 64 characters)");
+	sm_bossspawns_verbose = AutoExecConfig_CreateConVar("sm_bossspawns_verbose", "1", "Enable spawn verbose messages: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
 	
 	AutoExecConfig_ExecuteFile();
 	
@@ -219,12 +228,12 @@ public OnPluginStart()
 
 public OnConfigsExecuted()
 {
-	cv_Enabled = GetConVarBool(ConVars[1]);
-	cv_HitboxScale = GetConVarBool(ConVars[2]);
-	ParseConVarToLimits(ConVars[3], g_szBoundMin, sizeof(g_szBoundMin), g_fBoundMin, g_szBoundMax, sizeof(g_szBoundMax), g_fBoundMax);
-	cv_SpawnSounds = GetConVarBool(ConVars[4]);
-	GetConVarString(ConVars[5], sPluginTag, sizeof(sPluginTag));
-	cv_Verbose = GetConVarBool(ConVars[6]);
+	cv_Enabled = GetConVarBool(sm_bossspawns_status);
+	cv_HitboxScale = GetConVarBool(sm_bossspawns_hitboxes);
+	ParseConVarToLimits(sm_bossspawns_bounds, g_szBoundMin, sizeof(g_szBoundMin), g_fBoundMin, g_szBoundMax, sizeof(g_szBoundMax), g_fBoundMax);
+	cv_SpawnSounds = GetConVarBool(sm_bossspawns_spawnsounds);
+	GetConVarString(sm_bossspawns_chattag, sPluginTag, sizeof(sPluginTag));
+	cv_Verbose = GetConVarBool(sm_bossspawns_verbose);
 	
 	if (cv_Enabled)
 	{
@@ -239,31 +248,31 @@ public HandleCvars(Handle:cvar, const String:oldValue[], const String:newValue[]
 
 	new iNewValue = StringToInt(newValue);
 
-	if (cvar == ConVars[0])
+	if (cvar == sm_bossspawns_version)
 	{
-		SetConVarString(ConVars[0], PLUGIN_VERSION);
+		SetConVarString(sm_bossspawns_version, PLUGIN_VERSION);
 	}
-	else if (cvar == ConVars[1])
+	else if (cvar == sm_bossspawns_status)
 	{
 		cv_Enabled = bool:iNewValue;
 	}
-	else if (cvar == ConVars[2])
+	else if (cvar == sm_bossspawns_hitboxes)
 	{
 		cv_HitboxScale = bool:iNewValue;
 	}
-	else if (cvar == ConVars[3])
+	else if (cvar == sm_bossspawns_bounds)
 	{
-		ParseConVarToLimits(ConVars[3], g_szBoundMin, sizeof(g_szBoundMin), g_fBoundMin, g_szBoundMax, sizeof(g_szBoundMax), g_fBoundMax);
+		ParseConVarToLimits(sm_bossspawns_bounds, g_szBoundMin, sizeof(g_szBoundMin), g_fBoundMin, g_szBoundMax, sizeof(g_szBoundMax), g_fBoundMax);
 	}
-	else if (cvar == ConVars[4])
+	else if (cvar == sm_bossspawns_spawnsounds)
 	{
 		cv_SpawnSounds = bool:iNewValue;
 	}
-	else if (cvar == ConVars[5])
+	else if (cvar == sm_bossspawns_chattag)
 	{
-		GetConVarString(ConVars[5], sPluginTag, sizeof(sPluginTag));
+		GetConVarString(sm_bossspawns_chattag, sPluginTag, sizeof(sPluginTag));
 	}
-	else if (cvar == ConVars[6])
+	else if (cvar == sm_bossspawns_verbose)
 	{
 		cv_Verbose = bool:iNewValue;
 	}
