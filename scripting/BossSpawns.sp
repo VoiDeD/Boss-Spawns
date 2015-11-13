@@ -5,7 +5,6 @@
 #include <sdkhooks>
 #include <tf2_stocks>
 #include <morecolors>
-#include <autoexecconfig>
 #include <boss_spawns>
 
 #define PLUGIN_NAME	"[TF2] Boss Spawns"
@@ -183,19 +182,15 @@ public OnPluginStart()
 	LoadTranslations("BossSpawns.phrases");
 	
 	PrintToServer("%s %t", PLUGIN_TAG, "console initializing");
-	
-	AutoExecConfig_SetFile("BossSpawns");
-		
-	sm_bossspawns_version = AutoExecConfig_CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_DONTRECORD);
-	sm_bossspawns_status = AutoExecConfig_CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	sm_bossspawns_hitboxes = AutoExecConfig_CreateConVar("sm_bossspawns_hitboxes", "1", "Enable hitbox scaling on spawned bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	sm_bossspawns_bounds = AutoExecConfig_CreateConVar("sm_bossspawns_bounds", "0.1, 5.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", FCVAR_PLUGIN);
-	sm_bossspawns_spawnsounds = AutoExecConfig_CreateConVar("sm_bossspawns_spawnsounds", "1", "Enable spawn sounds for bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	sm_bossspawns_chattag = AutoExecConfig_CreateConVar("sm_bossspawns_chattag", "{gold}[BossSpawns]", "Tag for plugin to use: (Uses color tags, max 64 characters)");
-	sm_bossspawns_verbose = AutoExecConfig_CreateConVar("sm_bossspawns_verbose", "1", "Enable spawn verbose messages: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
-	
-	AutoExecConfig_ExecuteFile();
-	
+
+	sm_bossspawns_version = CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_PLUGIN|FCVAR_SPONLY|FCVAR_DONTRECORD);
+	sm_bossspawns_status = CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_hitboxes = CreateConVar("sm_bossspawns_hitboxes", "1", "Enable hitbox scaling on spawned bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_bounds = CreateConVar("sm_bossspawns_bounds", "0.1, 5.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", FCVAR_PLUGIN);
+	sm_bossspawns_spawnsounds = CreateConVar("sm_bossspawns_spawnsounds", "1", "Enable spawn sounds for bosses: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+	sm_bossspawns_chattag = CreateConVar("sm_bossspawns_chattag", "{gold}[BossSpawns]", "Tag for plugin to use: (Uses color tags, max 64 characters)");
+	sm_bossspawns_verbose = CreateConVar("sm_bossspawns_verbose", "1", "Enable spawn verbose messages: (1 = on, 0 = off)", FCVAR_PLUGIN, true, 0.0, true, 1.0);
+
 	for (new i = 0; i < sizeof(ConVars); i++)
 	{
 		HookConVarChange(ConVars[i], HandleCvars);
@@ -222,8 +217,6 @@ public OnPluginStart()
 	RegAdminCmd("sm_slayskeleblue", Command_SlayBLUSkeleton, ADMFLAG_GENERIC, "Slays all BLU Skeletons on the map - Usage: sm_slayskeleblue");
 	RegAdminCmd("sm_slayskeleking", Command_SlaySkeletonKing, ADMFLAG_GENERIC, "Slays all Skeleton Kings on the map - Usage: sm_slayskeleking");
 	RegAdminCmd("sm_slayghost", Command_SlayGhost, ADMFLAG_GENERIC, "Slays all Ghosts on the map - Usage: sm_slayghost");
-	
-	AutoExecConfig_CleanFile();
 }
 
 public OnConfigsExecuted()
