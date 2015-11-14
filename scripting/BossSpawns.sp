@@ -179,9 +179,6 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 public OnPluginStart()
 {
 	LoadTranslations("common.phrases");
-	LoadTranslations("BossSpawns.phrases");
-	
-	PrintToServer("%s %t", PLUGIN_TAG, "console initializing");
 
 	sm_bossspawns_version = CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_SPONLY|FCVAR_DONTRECORD);
 	sm_bossspawns_status = CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", _, true, 0.0, true, 1.0);
@@ -227,12 +224,6 @@ public OnConfigsExecuted()
 	cv_SpawnSounds = GetConVarBool(sm_bossspawns_spawnsounds);
 	GetConVarString(sm_bossspawns_chattag, sPluginTag, sizeof(sPluginTag));
 	cv_Verbose = GetConVarBool(sm_bossspawns_verbose);
-	
-	if (cv_Enabled)
-	{
-		PrintToServer("%s %t", PLUGIN_TAG, "console initialized");
-		PrintToServer("%s %t", PLUGIN_TAG, "console hitbox status", cv_HitboxScale ? "ON" : "OFF");
-	}
 }
 
 public HandleCvars(Handle:cvar, const String:oldValue[], const String:newValue[])
@@ -384,12 +375,12 @@ public Action:Command_SpawnHatman(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -401,7 +392,7 @@ public Action:Command_SpawnHatman(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -446,12 +437,12 @@ public Action:Command_SpawnEyeBoss(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -463,7 +454,7 @@ public Action:Command_SpawnEyeBoss(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -508,12 +499,12 @@ public Action:Command_SpawnEyeBossRED(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -525,7 +516,7 @@ public Action:Command_SpawnEyeBossRED(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -570,12 +561,12 @@ public Action:Command_SpawnEyeBossBLU(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -587,7 +578,7 @@ public Action:Command_SpawnEyeBossBLU(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -632,12 +623,12 @@ public Action:Command_SpawnMerasmus(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -649,7 +640,7 @@ public Action:Command_SpawnMerasmus(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -694,12 +685,12 @@ public Action:Command_SpawnGreenSkeleton(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -711,7 +702,7 @@ public Action:Command_SpawnGreenSkeleton(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -756,12 +747,12 @@ public Action:Command_SpawnREDSkeleton(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -773,7 +764,7 @@ public Action:Command_SpawnREDSkeleton(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -818,12 +809,12 @@ public Action:Command_SpawnBLUSkeleton(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -835,7 +826,7 @@ public Action:Command_SpawnBLUSkeleton(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -880,12 +871,12 @@ public Action:Command_SpawnSkeletonKing(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -897,7 +888,7 @@ public Action:Command_SpawnSkeletonKing(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -947,12 +938,12 @@ public Action:Command_SpawnGhost(client, args)
 		
 		if (fScale <= 0.0)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size specified");
+			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
 			return Plugin_Handled;
 		}
 		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
 		{
-			CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid size out of bounds", g_szBoundMin, g_szBoundMax);
+			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
 			return Plugin_Handled;
 		}
 		
@@ -964,7 +955,7 @@ public Action:Command_SpawnGhost(client, args)
 	
 	if (!SetTeleportEndPoint(client))
 	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "reply invalid spawn point");
+		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
 		return Plugin_Handled;
 	}
 	
@@ -985,10 +976,10 @@ ProcessActivity(client, const String:sBossName[])
 {
 	if (cv_Verbose)
 	{
-		CShowActivity2(client, sPluginTag, " %t", "spawned boss prefix message", sBossName);
-		CReplyToCommand(client, "%s %t", sPluginTag, "spawned boss prefix reply", sBossName);
+		CShowActivity2(client, sPluginTag, " {default}Spawned Boss: %s", sBossName);
+		CReplyToCommand(client, "%s {default}You have spawned a %s.", sPluginTag, sBossName);
 	}
-	LogAction(client, -1, "'%L' %t", client, "spawned boss prefix message", sBossName);
+	LogAction(client, -1, "'%L' Spawned Boss: %s", client, sBossName);
 }
 
 /***************************************************/
