@@ -2129,7 +2129,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2140,7 +2140,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2151,7 +2151,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2162,7 +2162,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2173,7 +2173,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2205,7 +2205,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2241,7 +2241,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal10%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal1%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2252,7 +2252,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2263,7 +2263,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
@@ -2288,7 +2288,7 @@ public OnMapStart()
 		decl String:iString[PLATFORM_MAX_PATH];
 		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic0%d.mp3", i);
 		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic%d.mp3", i);
-		if (FileExists(iString))
+		if (FileExists(iString, true))
 		{
 			PrecacheSound(iString, true);
 		}
