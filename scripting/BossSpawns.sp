@@ -1226,7 +1226,7 @@ public Action:Command_SlayHatman(client, args)
 		FireEvent(g_Event);
 		AcceptEntityInput(entity, "Kill");
 		
-		CShowActivity2(client, sPluginTag, "{default}Slayed the {unusual}Horseless Headless Horsemann");
+		CShowActivity2(client, sPluginTag, " {default}Slayed the {unusual}Horseless Headless Horsemann");
 		LogAction(client, -1, "\"%L\" slayed boss: Horseless Headless Horsemann", client);
 		CReplyToCommand(client, "%s {default}You've slayed the {unusual}Horseless Headless Horsemann", sPluginTag);
 	}
@@ -1253,7 +1253,7 @@ public Action:Command_SlayEyeBoss(client, args)
 			FireEvent(g_Event);
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {unusual}MONOCULUS!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {unusual}MONOCULUS!");
 			LogAction(client, -1, "\"%L\" slayed boss: MONOCULUS", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {unusual}MONOCULUS!", sPluginTag);
 		}
@@ -1281,7 +1281,7 @@ public Action:Command_SlayEyeBossRED(client, args)
 			FireEvent(g_Event);
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {red}RED Spectral MONOCULUS!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {red}RED Spectral MONOCULUS!");
 			LogAction(client, -1, "\"%L\" slayed boss: RED Spectral MONOCULUS", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {red}RED Spectral MONOCULUS!", sPluginTag);
 		}
@@ -1309,7 +1309,7 @@ public Action:Command_SlayEyeBossBLU(client, args)
 			FireEvent(g_Event);
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity(client, sPluginTag, "{default}Slayed the {blue}BLU Spectral MONOCULUS!");
+			CShowActivity(client, sPluginTag, " {default}Slayed the {blue}BLU Spectral MONOCULUS!");
 			LogAction(client, -1, "\"%L\" slayed boss: BLU Spectral MONOCULUS", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {blue}BLU Spectral MONOCULUS!", sPluginTag);
 		}
@@ -1334,7 +1334,7 @@ public Action:Command_SlayMerasmus(client, args)
 		FireEvent(g_Event);
 		AcceptEntityInput(entity, "Kill");
 		
-		CShowActivity2(client, sPluginTag, "{default}Slayed {unusual}Merasmus!");
+		CShowActivity2(client, sPluginTag, " {default}Slayed {unusual}Merasmus!");
 		LogAction(client, -1, "\"%L\" slayed boss: Merasmus", client);
 		CReplyToCommand(client, "%s {default}You've slayed the {unusual}Merasmus", sPluginTag);
 	}
@@ -1359,7 +1359,7 @@ public Action:Command_SlayGreenSkeleton(client, args)
 		{
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {community}Green Skeleton!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {community}Green Skeleton!");
 			LogAction(client, -1, "\"%L\" slayed boss: Green Skeleton", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {community}Green Skeleton", sPluginTag);
 		}
@@ -1385,7 +1385,7 @@ public Action:Command_SlayREDSkeleton(client, args)
 		{
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {red}RED Skeleton!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {red}RED Skeleton!");
 			LogAction(client, -1, "\"%L\" slayed boss: RED Skeleton", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {red}RED Skeleton", sPluginTag);
 		}
@@ -1411,7 +1411,7 @@ public Action:Command_SlayBLUSkeleton(client, args)
 		{
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {blue}BLU Skeleton!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {blue}BLU Skeleton!");
 			LogAction(client, -1, "\"%L\" slayed boss: BLU Skeleton", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {blue}BLU Skeleton", sPluginTag);
 		}
@@ -1439,7 +1439,7 @@ public Action:Command_SlaySkeletonKing(client, args)
 		{
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {unusual}Skeleton King!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {unusual}Skeleton King!");
 			LogAction(client, -1, "\"%L\" slayed boss: Skeleton King", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {unusual}Skeleton King", sPluginTag);
 		}
@@ -1467,7 +1467,7 @@ public Action:Command_SlayGhost(client, args)
 		{
 			AcceptEntityInput(entity, "Kill");
 			
-			CShowActivity2(client, sPluginTag, "{default}Slayed the {unusual}Ghost!");
+			CShowActivity2(client, sPluginTag, " {default}Slayed the {unusual}Ghost!");
 			LogAction(client, -1, "\"%L\" slayed boss: Ghost", client);
 			CReplyToCommand(client, "%s {default}You've slayed the {unusual}Ghost", sPluginTag);
 		}
