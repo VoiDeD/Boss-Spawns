@@ -36,9 +36,6 @@ new g_healthBar = -1;
 new bool:gSK_IsSpawning = false;
 new gSK_Spawner = -1;
 
-new bool:g_bInvisible[2048];
-new MapStarted = false;
-
 static const String:SkeletonKingSounds[][64] =
 {
 	"vo/halloween_mann_brothers/sf13_blutarch_enemies10.mp3",
@@ -97,52 +94,7 @@ static const String:MonoculusSounds[][64] =
 	"ui/halloween_boss_escape_ten.mp3",
 	"ui/halloween_boss_tagged_other_it.mp3"
 };
-/*
-static const String:GhostSounds[][64] = 
-{
-	"vo/halloween_moan1.mp3",
-	"vo/halloween_moan2.mp3",
-	"vo/halloween_moan3.mp3",
-	"vo/halloween_moan4.mp3",
-	"vo/halloween_boo1.mp3",
-	"vo/halloween_boo2.mp3",
-	"vo/halloween_boo3.mp3",
-	"vo/halloween_boo4.mp3",
-	"vo/halloween_boo5.mp3",
-	"vo/halloween_boo6.mp3",
-	"vo/halloween_boo7.mp3",
-	"vo/halloween_haunted1.mp3",
-	"vo/halloween_haunted2.mp3",
-	"vo/halloween_haunted3.mp3",
-	"vo/halloween_haunted4.mp3",
-	"vo/halloween_haunted5.mp3"
-};*/
 
-static const String:strGhostMoans[][64] = 
-{
-	"vo/halloween_moan1.mp3",
-	"vo/halloween_moan2.mp3",
-	"vo/halloween_moan3.mp3",
-	"vo/halloween_moan4.mp3"
-};
-static const String:strGhostBoos[][64] = 
-{
-	"vo/halloween_boo1.mp3",
-	"vo/halloween_boo2.mp3",
-	"vo/halloween_boo3.mp3",
-	"vo/halloween_boo4.mp3",
-	"vo/halloween_boo5.mp3",
-	"vo/halloween_boo6.mp3",
-	"vo/halloween_boo7.mp3"
-};
-static const String:strGhostEffects[][64] = 
-{
-	"vo/halloween_haunted1.mp3",
-	"vo/halloween_haunted2.mp3",
-	"vo/halloween_haunted3.mp3",
-	"vo/halloween_haunted4.mp3",
-	"vo/halloween_haunted5.mp3"
-};
 
 /***************************************************/
 //Plugin Starts
@@ -169,7 +121,6 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 	CreateNative("TF2_SpawnMerasmus", Native_SpawnMerasmus);
 	CreateNative("TF2_SpawnSkeleton", Native_SpawnSkeleton);
 	CreateNative("TF2_SpawnSkeletonKing", Native_SpawnSkeletonKing);
-	CreateNative("TF2_SpawnGhost", Native_SpawnGhost);
 	
 	RegPluginLibrary("boss_spawns");
 	
@@ -202,7 +153,6 @@ public OnPluginStart()
 	RegAdminCmd("sm_skelered", Command_SpawnREDSkeleton, ADMFLAG_GENERIC, "Spawns a RED Skeleton - Usage: sm_skelered <scale> <glow 0/1>");
 	RegAdminCmd("sm_skeleblue", Command_SpawnBLUSkeleton, ADMFLAG_GENERIC, "Spawns a BLU Skeleton - Usage: sm_skeleblue <scale> <glow 0/1>");
 	RegAdminCmd("sm_skeleking", Command_SpawnSkeletonKing, ADMFLAG_GENERIC, "Spawns a Skeleton King - Usage: sm_skeleking <scale> <glow 0/1>");
-	RegAdminCmd("sm_ghost", Command_SpawnGhost, ADMFLAG_GENERIC, "Spawns a Ghost - Usage: sm_ghost <scale> <glow 0/1>");
 	
 	RegAdminCmd("sm_slayhatman", Command_SlayHatman, ADMFLAG_GENERIC, "Slays all Horsemenn on the map - Usage: sm_slayhatman");
 	RegAdminCmd("sm_slayeyeboss", Command_SlayEyeBoss, ADMFLAG_GENERIC, "Slays all MONOCULUS! on the map - Usage: sm_slayeyeboss");
@@ -213,7 +163,6 @@ public OnPluginStart()
 	RegAdminCmd("sm_slayskelered", Command_SlayREDSkeleton, ADMFLAG_GENERIC, "Slays all RED Skeletons on the map - Usage: sm_slayskelered");
 	RegAdminCmd("sm_slayskeleblue", Command_SlayBLUSkeleton, ADMFLAG_GENERIC, "Slays all BLU Skeletons on the map - Usage: sm_slayskeleblue");
 	RegAdminCmd("sm_slayskeleking", Command_SlaySkeletonKing, ADMFLAG_GENERIC, "Slays all Skeleton Kings on the map - Usage: sm_slayskeleking");
-	RegAdminCmd("sm_slayghost", Command_SlayGhost, ADMFLAG_GENERIC, "Slays all Ghosts on the map - Usage: sm_slayghost");
 }
 
 public OnConfigsExecuted()
@@ -295,16 +244,6 @@ public OnPluginEnd()
 	while((entity = FindEntityByClassname(entity, "tf_zombie")) != -1)	//Kills Skeleton King as well.
 	{
 		if (IsValidEntity(entity))
-		{
-			AcceptEntityInput(entity, "Kill");
-		}
-	}
-	while((entity = FindEntityByClassname(entity, "simple_bot")) != -1)
-	{
-		decl String:sBuffer[32];
-		GetEntPropString(entity, Prop_Data, "m_iName", sBuffer, sizeof(sBuffer));
-		
-		if (IsValidEntity(entity) && StrEqual(sBuffer, "SpawnedGhost"))
 		{
 			AcceptEntityInput(entity, "Kill");
 		}
@@ -910,68 +849,6 @@ public Action:Command_SpawnSkeletonKing(client, args)
 	return Plugin_Handled;
 }
 
-public Action:Command_SpawnGhost(client, args)
-{
-	if (!cv_Enabled) return Plugin_Handled;
-	
-	if (!IsValidClient(client))
-	{
-		CReplyToCommand(client, "%s %t", sPluginTag, "Command is in-game only");
-		return Plugin_Handled;
-	}
-	
-	new String:szScale[5] = "0.0";
-	new String:sGlow[5] = "0";
-	
-	new Float:fScale = -1.0;
-	new bool:bGlow = false;
-	
-	if (args > 0)
-	{
-		GetCmdArg(1, szScale, sizeof(szScale));
-		TrimString(szScale);
-		
-		GetCmdArg(2, sGlow, sizeof(sGlow));
-		TrimString(sGlow);
-
-		fScale = StringToFloat(szScale);
-		
-		if (fScale <= 0.0)
-		{
-			CReplyToCommand(client, "%s Size must be more than 0.0.", sPluginTag);
-			return Plugin_Handled;
-		}
-		else if (fScale < g_fBoundMin || fScale > g_fBoundMax)
-		{
-			CReplyToCommand(client, "%s Size must be between %s and %s.", sPluginTag, g_szBoundMin, g_szBoundMax);
-			return Plugin_Handled;
-		}
-		
-		if (StrEqual(sGlow, "1"))
-		{
-			bGlow = true;
-		}
-	}
-	
-	if (!SetTeleportEndPoint(client))
-	{
-		CReplyToCommand(client, "%s Invalid spawn point, please make sure you're looking at a flat surface.", sPluginTag);
-		return Plugin_Handled;
-	}
-	
-	if (CheckEntityLimit(client)) return Plugin_Handled;
-	
-	if (!SpawnBoss("simple_bot", "SpawnedGhost", fScale, 0, 0.0, "0", bGlow ? true : false, false, true))
-	{
-		CReplyToCommand(client, "%s {default}Couldn't spawn a {unusual}Ghost{default} for some reason.", sPluginTag);
-		return Plugin_Handled;
-	}
-	
-	ProcessActivity(client, "{azure}Ghost");
-	
-	return Plugin_Handled;
-}
-
 ProcessActivity(client, const String:sBossName[])
 {
 	if (cv_Verbose)
@@ -985,7 +862,7 @@ ProcessActivity(client, const String:sBossName[])
 /***************************************************/
 //Spawn Function
 
-bool:SpawnBoss(const String:sEntityClass[], const String:sEntityName[], Float:scale = -1.0, team = 0, Float:offset = 0.0, String:skin[1] = "-1", bool:glow = false, bool:SkeletonKing = false, bool:Ghost = false)
+bool:SpawnBoss(const String:sEntityClass[], const String:sEntityName[], Float:scale = -1.0, team = 0, Float:offset = 0.0, String:skin[1] = "-1", bool:glow = false, bool:SkeletonKing = false)
 {
 	new entity = CreateEntityByName(sEntityClass);
 	if (IsValidEntity(entity))
@@ -1014,196 +891,11 @@ bool:SpawnBoss(const String:sEntityClass[], const String:sEntityName[], Float:sc
 			gSK_IsSpawning = true;
 		}
 		
-		if (Ghost)
-		{
-			SetEntProp(entity, Prop_Data, "m_takedamage", 0, 1);
-			SetEntProp(entity, Prop_Send, "m_CollisionGroup", 2);
-		}
-		
 		TeleportEntity(entity, g_pos, NULL_VECTOR, NULL_VECTOR);
-		
-		if (Ghost)
-		{
-			AttachParticle(entity, "ghost_appearation", _, 5.0);
-			SetEntityModel(entity, "models/props_halloween/ghost.mdl");
-			g_bInvisible[entity] = false;
-			CreateTimer(GetRandomFloat(5.0, 10.0), Timer_ToggleInvis, EntIndexToEntRef(entity));
-			new flags = GetEntityFlags(entity) | FL_NOTARGET;
-			SetEntityFlags(entity, flags);
-			SDKHook(entity, SDKHook_Touch, GhostThink); 
-		}
+
 		return true;
 	}
 	return false;
-}
-
-/***************************************************/
-//Ghost Functions (consolidating later)
-
-public GhostThink(entity)
-{
-	if (!IsValidEntity(entity))
-	{
-		SDKUnhook(entity, SDKHook_Touch, GhostThink);
-		return;
-	}
-	
-	if (entity <= 0 || entity > 2048) return;
-	
-	static Float:flLastCall;
-	if (GetEngineTime() - 0.1 <= flLastCall) return;
-	
-	flLastCall = GetEngineTime();
-	
-	new Float:vecGhostOrigin[3], Float:vecClientOrigin[3], Float:flDistance;
-	
-	if (IsValidEntity(entity) && !g_bInvisible[entity])
-	{
-		GetEntPropVector(entity, Prop_Send, "m_vecOrigin", vecGhostOrigin); 
-		
-		for(new i = 1; i <= MaxClients; i++)
-		{
-			if (IsValidClient(i))
-			{
-				GetClientAbsOrigin(i, vecClientOrigin);
-				flDistance = GetVectorDistance(vecGhostOrigin, vecClientOrigin);
-				
-				if (flDistance < 0)
-				{
-					flDistance *= -1.0;
-				}
-				
-				if (flDistance <= 240.0)
-				{
-					ScarePlayer(entity, i);
-				}
-			}
-		}
-	}
-}
-
-public Action:Timer_ToggleInvis(Handle:timer, any:entity) 
-{
-	new ent = EntRefToEntIndex(entity);
-	if (ent != INVALID_ENT_REFERENCE && IsValidEntity(ent))
-	{
-		decl String:sClass[32];
-		GetEntityClassname(ent, sClass, sizeof(sClass));
-	
-		if (StrEqual(sClass, "simple_bot"))
-		{
-			switch (g_bInvisible[ent])
-			{
-				case true:
-					{
-						SetEntityModel(ent, "models/props_halloween/ghost.mdl");
-						AttachParticle(ent, "ghost_appearation", _, 5.0);
-						SetEntityRenderColor(ent, _, _, _, 255);
-						SetEntityRenderMode(ent, RENDER_NORMAL);
-						EmitSoundToAll(strGhostMoans[GetRandomInt(0, sizeof(strGhostMoans)-1)], ent);
-						EmitSoundToAll(strGhostEffects[GetRandomInt(0, sizeof(strGhostEffects)-1)], ent);
-						CreateTimer(GetRandomFloat(5.0, 10.0), Timer_ToggleInvis, EntIndexToEntRef(ent));
-						g_bInvisible[ent] = false;
-					}
-				case false:
-					{
-						AttachParticle(ent, "ghost_appearation", _, 5.0);
-						SetEntityRenderMode(ent, RENDER_TRANSCOLOR);
-						SetEntityRenderColor(ent, _, _, _, 0);
-						SetVariantString("ParticleEffectStop");
-						AcceptEntityInput(ent, "DispatchEffect");
-						EmitSoundToAll(strGhostEffects[GetRandomInt(0, sizeof(strGhostEffects)-1)], ent);
-						SetEntityModel(ent, "models/humans/group01/female_01.mdl");
-						CreateTimer(GetRandomFloat(60.0, 120.0), Timer_ToggleInvis, EntIndexToEntRef(ent));
-						g_bInvisible[ent] = true;
-					}
-			}
-		}
-	}
-}
-
-AttachParticle(iEntity, const String:strParticleEffect[], const String:strAttachPoint[]="", Float:flZOffset=0.0, Float:flSelfDestruct=0.0) 
-{ 
-	if (!MapStarted) return -1;
-	
-	new iParticle = CreateEntityByName("info_particle_system"); 
-	if (!IsValidEdict(iParticle)) return 0; 
-	
-	new Float:flPos[3]; 
-	GetEntPropVector(iEntity, Prop_Send, "m_vecOrigin", flPos); 
-	flPos[2] += flZOffset; 
-	
-	TeleportEntity(iParticle, flPos, NULL_VECTOR, NULL_VECTOR); 
-	
-	DispatchKeyValue(iParticle, "targetname", "killme%dp@later");
-	DispatchKeyValue(iParticle, "effect_name", strParticleEffect); 
-	DispatchSpawn(iParticle); 
-	
-	SetVariantString("!activator"); 
-	AcceptEntityInput(iParticle, "SetParent", iEntity); 
-	ActivateEntity(iParticle); 
-	
-	if (strlen(strAttachPoint)) 
-	{ 
-		SetVariantString(strAttachPoint); 
-		AcceptEntityInput(iParticle, "SetParentAttachmentMaintainOffset"); 
-	} 
-	
-	AcceptEntityInput(iParticle, "start");
-
-	if (flSelfDestruct > 0.0)  CreateTimer(flSelfDestruct, Timer_DeleteParticle, EntIndexToEntRef(iParticle)); 
-
-	return iParticle; 
-} 
-
-public Action:Timer_DeleteParticle(Handle:timer, any:data) 
-{ 
-    new iEntity = EntRefToEntIndex(data); 
-    if (iEntity > MaxClients)
-	{
-        AcceptEntityInput(iEntity, "Kill"); 
-	}
-    return Plugin_Handled; 
-}
-
-ScarePlayer(entity, client)
-{
-	static Float:flLastScare[MAXPLAYERS+1];
-	static Float:flLastBoo;
-	
-	if (!IsValidEntity(entity) || !IsValidClient(client))
-	{
-		return;
-	}
-	
-	if ((GetEngineTime() - 5.0) <= flLastScare[client])
-	{
-		return;
-	}
-	
-	flLastScare[client] = GetEngineTime();
-	
-	if (GetEngineTime() - 1.0 > flLastBoo)
-	{
-		flLastBoo = GetEngineTime();
-		EmitSoundToAll(strGhostBoos[ GetRandomInt(0, sizeof(strGhostBoos) - 1)], entity);
-	}
-	
-	new Handle:hData;
-	CreateDataTimer(0.5, Timer_StunPlayer, hData, TIMER_FLAG_NO_MAPCHANGE|TIMER_DATA_HNDL_CLOSE);
-	WritePackCell(hData, client);
-}
-
-public Action:Timer_StunPlayer(Handle:hTimer, any:data)
-{
-	ResetPack(data);
-	new client = ReadPackCell(data);
-	if (IsValidClient(client))
-	{
-		TF2_StunPlayer(client, 5.0, _, TF_STUNFLAGS_GHOSTSCARE);
-	}
-	
-	return Plugin_Stop;
 }
 
 /***************************************************/
@@ -1447,33 +1139,6 @@ public Action:Command_SlaySkeletonKing(client, args)
 	return Plugin_Handled;
 }
 
-public Action:Command_SlayGhost(client, args)
-{
-	if (!cv_Enabled) return Plugin_Handled;
-	
-	new entity = -1;
-	while ((entity = FindEntityByClassname(entity, "simple_bot")) != -1)
-	{
-		if (!IsValidEntity(entity))
-		{
-			CReplyToCommand(client, "%s {default}Couldn't slay the {unusual}Ghost{default} for some reason.", sPluginTag);
-			return Plugin_Handled;
-		}
-		
-		decl String:sBuffer[32];
-		GetEntPropString(entity, Prop_Data, "m_iName", sBuffer, sizeof(sBuffer));
-		
-		if (StrEqual(sBuffer, "SpawnedGhost"))
-		{
-			AcceptEntityInput(entity, "Kill");
-			
-			CShowActivity2(client, sPluginTag, " {default}Slayed the {unusual}Ghost!");
-			LogAction(client, -1, "\"%L\" slayed boss: Ghost", client);
-			CReplyToCommand(client, "%s {default}You've slayed the {unusual}Ghost", sPluginTag);
-		}
-	}
-	return Plugin_Handled;
-}
 
 /***************************************************/
 
@@ -1951,44 +1616,6 @@ public Native_SpawnSkeletonKing(Handle:plugin, numParams)
 	}
 }
 
-public Native_SpawnGhost(Handle:plugin, numParams)
-{
-	if (!cv_Enabled)
-	{
-		ThrowNativeError(SP_ERROR_INDEX, "Plugin currently disabled.");
-	}
-	
-	new client = GetNativeCell(1);
-	
-	if (!IsValidClient(client))
-	{
-		ThrowNativeError(SP_ERROR_INDEX, "Error spawning Ghost, invalid client index.");
-	}
-	
-	g_pos[0] = Float:GetNativeCell(2);
-	g_pos[1] = Float:GetNativeCell(3);
-	g_pos[2] = Float:GetNativeCell(4);
-	new bool:bGlow = GetNativeCell(6);
-	new bool:bSpew = GetNativeCell(5);
-	
-	if (SpawnBoss("simple_bot", "SpawnedGhost", 1.0, 0, 0.0, "-1", bGlow, false, true))
-	{
-		if (bSpew)
-		{
-			CShowActivity2(client, sPluginTag, "{default}Spawned a {unusual}Ghost via natives!");
-			LogAction(client, -1, "\"%L\" spawned boss via natives: Ghost", client);
-			CReplyToCommand(client, "%s {default}You've spawned {unusual}Ghost via natives!", sPluginTag);
-		}
-	}
-	else
-	{
-		if (bSpew)
-		{
-			CReplyToCommand(client, "%s {default}Couldn't spawn the {unusual}Ghost{default} for some reason via natives.", sPluginTag);
-		}
-		ThrowNativeError(SP_ERROR_INDEX, "Error spawning Ghost, could not spawn Ghost.");
-	}
-}
 
 /***************************************************/
 
@@ -2039,20 +1666,9 @@ ResizeHitbox(entity, const String:sEntityClass[], Float:fScale = 1.0)
 	SetEntPropVector(entity, Prop_Send, "m_vecMaxs", vecScaledBossMax);
 }
 
-public OnMapEnd()
-{
-	MapStarted = false;
-}
-
 //Lets put this behemoth of a function at the bottom shall we... get it the hell out of the way.
 public OnMapStart()
 {
-	MapStarted = true;
-	
-	PrecacheModel("models/humans/group01/female_01.mdl", true); //Simple_bots default model
-	PrecacheModel("models/props_halloween/ghost.mdl", true);	//Ghost model itself
-	PrecacheModel("ghost_appearation", true);					//Ghost appear & disappear particle
-	
 	g_healthBar = FindEntityByClassname(-1, "monster_resource");
 	if (g_healthBar == -1)
 	{
@@ -2298,10 +1914,6 @@ public OnMapStart()
 	PrecacheSounds(MonoculusSounds, sizeof(MonoculusSounds));
 	PrecacheSounds(MerasmusSounds, sizeof(MerasmusSounds));
 	PrecacheSounds(SkeletonKingSounds, sizeof(SkeletonKingSounds));
-	//PrecacheSounds(GhostSounds, sizeof(SkeletonKingSounds));
-	PrecacheSounds(strGhostMoans, sizeof(strGhostMoans));
-	PrecacheSounds(strGhostBoos, sizeof(strGhostBoos));
-	PrecacheSounds(strGhostEffects, sizeof(strGhostEffects));
 }
 
 stock PrecacheSounds(const String:strSounds[][], iArraySize)
