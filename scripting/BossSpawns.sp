@@ -41,107 +41,107 @@ new MapStarted = false;
 
 static const String:SkeletonKingSounds[][64] =
 {
-	"vo/halloween_mann_brothers/sf13_blutarch_enemies10.wav",
-	"vo/halloween_mann_brothers/sf13_blutarch_enemies11.wav",
-	"vo/halloween_mann_brothers/sf13_blutarch_enemies12.wav",
-	"vo/halloween_mann_brothers/sf13_blutarch_enemies13.wav",
-	"vo/halloween_mann_brothers/sf13_blutarch_enemies13.wav",
-	"vo/halloween_mann_brothers/sf13_redmond_enemies05.wav",
-	"vo/halloween_mann_brothers/sf13_redmond_enemies06.wav",
-	"vo/halloween_mann_brothers/sf13_redmond_enemies07.wav",
-	"vo/halloween_mann_brothers/sf13_redmond_enemies08.wav"
+	"vo/halloween_mann_brothers/sf13_blutarch_enemies10.mp3",
+	"vo/halloween_mann_brothers/sf13_blutarch_enemies11.mp3",
+	"vo/halloween_mann_brothers/sf13_blutarch_enemies12.mp3",
+	"vo/halloween_mann_brothers/sf13_blutarch_enemies13.mp3",
+	"vo/halloween_mann_brothers/sf13_blutarch_enemies13.mp3",
+	"vo/halloween_mann_brothers/sf13_redmond_enemies05.mp3",
+	"vo/halloween_mann_brothers/sf13_redmond_enemies06.mp3",
+	"vo/halloween_mann_brothers/sf13_redmond_enemies07.mp3",
+	"vo/halloween_mann_brothers/sf13_redmond_enemies08.mp3"
 };
 
 static const String:MerasmusSounds[][64] =
 {
-	"vo/halloween_merasmus/sf12_hide_idles_demo01.wav",
-	"vo/halloween_merasmus/sf12_magic_backfire06.wav",
-	"vo/halloween_merasmus/sf12_magic_backfire07.wav",
-	"vo/halloween_merasmus/sf12_magic_backfire23.wav",
-	"vo/halloween_merasmus/sf12_magic_backfire29.wav",
-	"vo/halloween_merasmus/sf12_magicwords11.wav",
-	"misc/halloween/merasmus_appear.wav",
-	"misc/halloween/merasmus_death.wav",
-	"misc/halloween/merasmus_disappear.wav",
-	"misc/halloween/merasmus_float.wav",
-	"misc/halloween/merasmus_hiding_explode.wav",
-	"misc/halloween/merasmus_spell.wav",
-	"misc/halloween/merasmus_stun.wav"
+	"vo/halloween_merasmus/sf12_hide_idles_demo01.mp3",
+	"vo/halloween_merasmus/sf12_magic_backfire06.mp3",
+	"vo/halloween_merasmus/sf12_magic_backfire07.mp3",
+	"vo/halloween_merasmus/sf12_magic_backfire23.mp3",
+	"vo/halloween_merasmus/sf12_magic_backfire29.mp3",
+	"vo/halloween_merasmus/sf12_magicwords11.mp3",
+	"misc/halloween/merasmus_appear.mp3",
+	"misc/halloween/merasmus_death.mp3",
+	"misc/halloween/merasmus_disappear.mp3",
+	"misc/halloween/merasmus_float.mp3",
+	"misc/halloween/merasmus_hiding_explode.mp3",
+	"misc/halloween/merasmus_spell.mp3",
+	"misc/halloween/merasmus_stun.mp3"
 };
 
 static const String:HorsemannSounds[][64] =
 {
-	"ui/halloween_boss_summon_rumble.wav",
-	"vo/halloween_boss/knight_dying.wav",
-	"vo/halloween_boss/knight_spawn.wav",
-	"vo/halloween_boss/knight_alert.wav",
-	"weapons/halloween_boss/knight_axe_hit.wav",
-	"weapons/halloween_boss/knight_axe_miss.wav"
+	"ui/halloween_boss_summon_rumble.mp3",
+	"vo/halloween_boss/knight_dying.mp3",
+	"vo/halloween_boss/knight_spawn.mp3",
+	"vo/halloween_boss/knight_alert.mp3",
+	"weapons/halloween_boss/knight_axe_hit.mp3",
+	"weapons/halloween_boss/knight_axe_miss.mp3"
 };
 
 static const String:MonoculusSounds[][64] =
 {
-	"vo/halloween_eyeball/eyeball_biglaugh01.wav",
-	"vo/halloween_eyeball/eyeball_boss_pain01.wav",
-	"vo/halloween_eyeball/eyeball_teleport01.wav",
-	"ui/halloween_boss_summon_rumble.wav",
-	"ui/halloween_boss_chosen_it.wav",
-	"ui/halloween_boss_defeated_fx.wav",
-	"ui/halloween_boss_defeated.wav",
-	"ui/halloween_boss_player_becomes_it.wav",
-	"ui/halloween_boss_summoned_fx.wav",
-	"ui/halloween_boss_summoned.wav",
-	"ui/halloween_boss_tagged_other_it.wav",
-	"ui/halloween_boss_escape.wav",
-	"ui/halloween_boss_escape_sixty.wav",
-	"ui/halloween_boss_escape_ten.wav",
-	"ui/halloween_boss_tagged_other_it.wav"
+	"vo/halloween_eyeball/eyeball_biglaugh01.mp3",
+	"vo/halloween_eyeball/eyeball_boss_pain01.mp3",
+	"vo/halloween_eyeball/eyeball_teleport01.mp3",
+	"ui/halloween_boss_summon_rumble.mp3",
+	"ui/halloween_boss_chosen_it.mp3",
+	"ui/halloween_boss_defeated_fx.mp3",
+	"ui/halloween_boss_defeated.mp3",
+	"ui/halloween_boss_player_becomes_it.mp3",
+	"ui/halloween_boss_summoned_fx.mp3",
+	"ui/halloween_boss_summoned.mp3",
+	"ui/halloween_boss_tagged_other_it.mp3",
+	"ui/halloween_boss_escape.mp3",
+	"ui/halloween_boss_escape_sixty.mp3",
+	"ui/halloween_boss_escape_ten.mp3",
+	"ui/halloween_boss_tagged_other_it.mp3"
 };
 /*
 static const String:GhostSounds[][64] = 
 {
-	"vo/halloween_moan1.wav",
-	"vo/halloween_moan2.wav",
-	"vo/halloween_moan3.wav",
-	"vo/halloween_moan4.wav",
-	"vo/halloween_boo1.wav",
-	"vo/halloween_boo2.wav",
-	"vo/halloween_boo3.wav",
-	"vo/halloween_boo4.wav",
-	"vo/halloween_boo5.wav",
-	"vo/halloween_boo6.wav",
-	"vo/halloween_boo7.wav",
-	"vo/halloween_haunted1.wav",
-	"vo/halloween_haunted2.wav",
-	"vo/halloween_haunted3.wav",
-	"vo/halloween_haunted4.wav",
-	"vo/halloween_haunted5.wav"
+	"vo/halloween_moan1.mp3",
+	"vo/halloween_moan2.mp3",
+	"vo/halloween_moan3.mp3",
+	"vo/halloween_moan4.mp3",
+	"vo/halloween_boo1.mp3",
+	"vo/halloween_boo2.mp3",
+	"vo/halloween_boo3.mp3",
+	"vo/halloween_boo4.mp3",
+	"vo/halloween_boo5.mp3",
+	"vo/halloween_boo6.mp3",
+	"vo/halloween_boo7.mp3",
+	"vo/halloween_haunted1.mp3",
+	"vo/halloween_haunted2.mp3",
+	"vo/halloween_haunted3.mp3",
+	"vo/halloween_haunted4.mp3",
+	"vo/halloween_haunted5.mp3"
 };*/
 
 static const String:strGhostMoans[][64] = 
 {
-	"vo/halloween_moan1.wav",
-	"vo/halloween_moan2.wav",
-	"vo/halloween_moan3.wav",
-	"vo/halloween_moan4.wav"
+	"vo/halloween_moan1.mp3",
+	"vo/halloween_moan2.mp3",
+	"vo/halloween_moan3.mp3",
+	"vo/halloween_moan4.mp3"
 };
 static const String:strGhostBoos[][64] = 
 {
-	"vo/halloween_boo1.wav",
-	"vo/halloween_boo2.wav",
-	"vo/halloween_boo3.wav",
-	"vo/halloween_boo4.wav",
-	"vo/halloween_boo5.wav",
-	"vo/halloween_boo6.wav",
-	"vo/halloween_boo7.wav"
+	"vo/halloween_boo1.mp3",
+	"vo/halloween_boo2.mp3",
+	"vo/halloween_boo3.mp3",
+	"vo/halloween_boo4.mp3",
+	"vo/halloween_boo5.mp3",
+	"vo/halloween_boo6.mp3",
+	"vo/halloween_boo7.mp3"
 };
 static const String:strGhostEffects[][64] = 
 {
-	"vo/halloween_haunted1.wav",
-	"vo/halloween_haunted2.wav",
-	"vo/halloween_haunted3.wav",
-	"vo/halloween_haunted4.wav",
-	"vo/halloween_haunted5.wav"
+	"vo/halloween_haunted1.mp3",
+	"vo/halloween_haunted2.mp3",
+	"vo/halloween_haunted3.mp3",
+	"vo/halloween_haunted4.mp3",
+	"vo/halloween_haunted5.mp3"
 };
 
 /***************************************************/
@@ -2078,57 +2078,57 @@ public OnMapStart()
 	for (i = 1; i <= 2; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_boss/knight_alert0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_boss/knight_alert0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 4; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_boss/knight_attack0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_boss/knight_attack0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 2; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_boss/knight_death0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_boss/knight_death0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 4; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_boss/knight_laugh0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_boss/knight_laugh0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 3; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_boss/knight_pain0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_boss/knight_pain0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 3; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball_laugh0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball_laugh0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 3; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball_mad0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball_mad0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 13; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_eyeball/eyeball%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2138,8 +2138,8 @@ public OnMapStart()
 	for (i = 1; i <= 17; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_appears%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2149,8 +2149,8 @@ public OnMapStart()
 	for (i = 1; i <= 11; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_attacks%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2160,8 +2160,8 @@ public OnMapStart()
 	for (i = 1; i <= 54; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_headbomb%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2171,8 +2171,8 @@ public OnMapStart()
 	for (i = 1; i <= 33; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_held_up%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2182,29 +2182,29 @@ public OnMapStart()
 	for (i = 2; i <= 4; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_island0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_island0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 3; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_skullhat0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_bcon_skullhat0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 
 	for (i = 1; i <= 2; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_combat_idle0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_combat_idle0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 12; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_defeated%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2214,22 +2214,22 @@ public OnMapStart()
 	for (i = 1; i <= 9; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_found0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_found0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 
 	for (i = 3; i <= 6; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_grenades0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_grenades0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 1; i <= 26; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_headbomb_hit0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_headbomb_hit%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_headbomb_hit0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_headbomb_hit%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2239,8 +2239,8 @@ public OnMapStart()
 	for (i = 1; i <= 19; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal10%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal1%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal10%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_heal1%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2250,8 +2250,8 @@ public OnMapStart()
 	for (i = 1; i <= 49; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_hide_idles%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2261,8 +2261,8 @@ public OnMapStart()
 	for (i = 1; i <= 16; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_leaving%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
@@ -2272,22 +2272,22 @@ public OnMapStart()
 	for (i = 1; i <= 5; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_pain0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_pain0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 4; i <= 8; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_ranged_attack0%d.wav", i);
+		Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_ranged_attack0%d.mp3", i);
 		PrecacheSound(iString, true);
 	}
 	
 	for (i = 2; i <= 13; i++)
 	{
 		decl String:iString[PLATFORM_MAX_PATH];
-		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic0%d.wav", i);
-		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic%d.wav", i);
+		if (i < 10) Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic0%d.mp3", i);
+		else Format(iString, sizeof(iString), "vo/halloween_merasmus/sf12_staff_magic%d.mp3", i);
 		if (FileExists(iString))
 		{
 			PrecacheSound(iString, true);
