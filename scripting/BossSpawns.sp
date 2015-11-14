@@ -186,7 +186,7 @@ public OnPluginStart()
 	sm_bossspawns_version = CreateConVar("sm_bossspawns_version", PLUGIN_VERSION, PLUGIN_NAME, FCVAR_REPLICATED|FCVAR_NOTIFY|FCVAR_SPONLY|FCVAR_DONTRECORD);
 	sm_bossspawns_status = CreateConVar("sm_bossspawns_status", "1", "Status of the plugin: (1 = on, 0 = off)", _, true, 0.0, true, 1.0);
 	sm_bossspawns_hitboxes = CreateConVar("sm_bossspawns_hitboxes", "1", "Enable hitbox scaling on spawned bosses: (1 = on, 0 = off)", _, true, 0.0, true, 1.0);
-	sm_bossspawns_bounds = CreateConVar("sm_bossspawns_bounds", "0.1, 5.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", _);
+	sm_bossspawns_bounds = CreateConVar("sm_bossspawns_bounds", "0.1, 20.0", "Lower (optional) and upper bounds for resizing, separated with a comma.", _);
 	sm_bossspawns_spawnsounds = CreateConVar("sm_bossspawns_spawnsounds", "1", "Enable spawn sounds for bosses: (1 = on, 0 = off)", _, true, 0.0, true, 1.0);
 	sm_bossspawns_chattag = CreateConVar("sm_bossspawns_chattag", "{gold}[BossSpawns]", "Tag for plugin to use: (Uses color tags, max 64 characters)");
 	sm_bossspawns_verbose = CreateConVar("sm_bossspawns_verbose", "0", "Enable spawn verbose messages: (1 = on, 0 = off)", _, true, 0.0, true, 1.0);
